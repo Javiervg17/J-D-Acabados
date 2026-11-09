@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>J&D Servicios Generales y Acabados - Maestro de Obra</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: '#0f172a',
+                            slate: '#1e293b',
+                            amber: '#f59e0b',
+                            amberHover: '#d97706',
+                            emerald: '#10b981',
+                            light: '#f8fafc'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.98);
+            backdrop-filter: blur(12px);
+        }
+        .touch-action-none {
+            touch-action: manipulation;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased flex flex-col min-h-screen selection:bg-brand-amber selection:text-slate-950">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-40 glass-nav border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                
+                <!-- Logo J&D -->
+                <a href="#inicio" class="flex items-center space-x-2.5">
+                    <div class="bg-gradient-to-br from-brand-amber to-amber-600 text-slate-950 px-2.5 py-1.5 rounded-xl font-black text-lg sm:text-2xl tracking-tighter shadow-lg flex items-center justify-center">
+                        J&D
+                    </div>
+                    <div class="leading-tight">
+                        <span class="text-base sm:text-lg font-extrabold tracking-tight block text-white">SERVICIOS GENERALES</span>
+                        <span class="text-[10px] sm:text-xs text-brand-amber font-bold tracking-widest uppercase block">Acabados & Construcción</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-6 font-semibold text-sm">
+                    <a href="#inicio" class="hover:text-brand-amber transition">Inicio</a>
+                    <a href="#servicios" class="hover:text-brand-amber transition">Servicios</a>
+                    <a href="#galeria" class="hover:text-brand-amber transition">Galería</a>
+                    <a href="#cotizador" class="hover:text-brand-amber transition">Cotizador</a>
+                    <a href="#contacto" class="hover:text-brand-amber transition">Contacto</a>
+                </nav>
+
+                <!-- Actions Desktop -->
+                <div class="hidden md:flex items-center space-x-3">
+                    <button onclick="openAdminModal()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-2 rounded-lg border border-slate-700 transition">
+                        <i class="fa-solid fa-lock text-brand-amber mr-1"></i> Admin
+                    </button>
+                    <a id="nav-ws-btn" href="https://wa.me/51948706087" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2 rounded-xl flex items-center shadow-lg transition">
+                        <i class="fa-brands fa-whatsapp text-lg mr-2"></i> WhatsApp
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Trigger -->
+                <div class="flex items-center space-x-2 md:hidden">
+                    <button onclick="openAdminModal()" class="text-xs bg-slate-800 text-brand-amber p-2 rounded-lg border border-slate-700">
+                        <i class="fa-solid fa-lock text-base"></i>
+                    </button>
+                    <button id="mobile-menu-btn" class="text-slate-200 hover:text-white p-2 text-2xl focus:outline-none">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Dropdown) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-950 border-b border-slate-800 px-4 pt-3 pb-6 space-y-3">
+            <a href="#inicio" onclick="closeMobileMenu()" class="block py-2 text-base font-medium text-slate-200 border-b border-slate-800/60">Inicio</a>
+            <a href="#servicios" onclick="closeMobileMenu()" class="block py-2 text-base font-medium text-slate-200 border-b border-slate-800/60">Servicios y Especialidades</a>
+            <a href="#galeria" onclick="closeMobileMenu()" class="block py-2 text-base font-medium text-slate-200 border-b border-slate-800/60">Galería de Modelos</a>
+            <a href="#cotizador" onclick="closeMobileMenu()" class="block py-2 text-base font-medium text-slate-200 border-b border-slate-800/60">Cotizador Express</a>
+            <a href="#contacto" onclick="closeMobileMenu()" class="block py-2 text-base font-medium text-slate-200">Contacto Directo</a>
+            
+            <div class="pt-3">
+                <a id="mobile-ws-btn" href="https://wa.me/51948706087" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-3 rounded-xl flex items-center justify-center space-x-2 text-base shadow-md">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    <span>Escribir a WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- BOTÓN FLOTANTE WHATSAPP -->
+    <a id="floating-ws-btn" href="https://wa.me/51948706087" target="_blank" class="fixed bottom-5 right-5 z-50 bg-emerald-500 hover:bg-emerald-600 text-white p-3.5 sm:p-4 rounded-full shadow-2xl flex items-center justify-center transition transform active:scale-95" title="Contactar por WhatsApp">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+    </a>
+
+    <!-- ADMIN STRIP BAR (SI ESTÁ LOGUEADO) -->
+    <div id="admin-bar" class="hidden bg-brand-amber text-slate-950 px-4 py-2 text-xs sm:text-sm font-bold flex justify-between items-center shadow-lg sticky top-16 sm:top-20 z-30">
+        <div class="flex items-center space-x-2 truncate">
+            <i class="fa-solid fa-user-shield text-base"></i>
+            <span class="truncate">MODO ADMIN ACTIVO - Edición habilitada</span>
+        </div>
+        <div class="flex items-center space-x-2 shrink-0">
+            <button onclick="openAdminPanel()" class="bg-slate-950 text-white px-2.5 py-1 rounded-lg text-xs hover:bg-slate-800">
+                Panel
+            </button>
+            <button onclick="logoutAdmin()" class="bg-red-700 text-white px-2.5 py-1 rounded-lg text-xs hover:bg-red-800">
+                Salir
+            </button>
+        </div>
+    </div>
+
+    <main class="flex-grow">
+        <!-- HERO SECTION -->
+        <section id="inicio" class="relative bg-slate-950 py-12 sm:py-20 lg:py-24 overflow-hidden border-b border-slate-800">
+            <div class="absolute inset-0 opacity-15 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=1200&q=80');"></div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                    
+                    <div class="w-full lg:col-span-7 space-y-5 text-center sm:text-left">
+                        <div class="inline-flex items-center space-x-2 bg-brand-amber/10 border border-brand-amber/30 text-brand-amber px-3 py-1 rounded-full text-xs font-bold">
+                            <i class="fa-solid fa-helmet-safety"></i>
+                            <span>Maestro de Obra y Multiservicios J&D</span>
+                        </div>
+                        
+                        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+                            Acabados de Casa, Drywall & <span class="text-brand-amber">Electricidad</span>
+                        </h1>
+                        
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                            Trabajos garantizados de construcción, mayólica, mesones de concreto, gasfitería, bombas de agua, cámaras de seguridad y reparación de herramientas eléctricas (taladros y amoladoras).
+                        </p>
+
+                        <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                            <a id="hero-ws-btn" href="https://wa.me/51948706087" target="_blank" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-base px-6 py-3.5 rounded-xl flex items-center justify-center shadow-lg transition">
+                                <i class="fa-brands fa-whatsapp text-2xl mr-2.5"></i> Cotizar por WhatsApp
+                            </a>
+                            <a href="#cotizador" class="w-full sm:w-auto bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-base px-6 py-3.5 rounded-xl border border-slate-700 text-center transition">
+                                Ver Calculadora
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- CARD DE PRESENTACIÓN -->
+                    <div class="w-full lg:col-span-5 mt-4 lg:mt-0">
+                        <div class="bg-slate-900 border border-slate-800 p-5 sm:p-6 rounded-2xl shadow-2xl space-y-4">
+                            <div class="flex items-center space-x-3.5 border-b border-slate-800 pb-4">
+                                <div class="w-14 h-14 bg-gradient-to-tr from-brand-amber to-amber-600 text-slate-950 font-black rounded-2xl flex items-center justify-center text-xl shadow-md shrink-0">
+                                    J&D
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-white">Maestro Calificado</h3>
+                                    <p class="text-xs text-brand-amber font-semibold">+51 948 706 087</p>
+                                </div>
+                            </div>
+                            
+                            <ul class="space-y-2.5 text-xs sm:text-sm text-slate-300">
+                                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2 shrink-0"></i> Instalaciones de Drywall y Cielo Raso</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2 shrink-0"></i> Enchapado de Mayólica y Porcelanato</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2 shrink-0"></i> Mesones y Cocinas de Concreto</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2 shrink-0"></i> Reparación de Taladros y Moledoras</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2 shrink-0"></i> Bombas de Agua y Gasfitería</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICIOS -->
+        <section id="servicios" class="py-12 sm:py-20 bg-slate-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
+                    <span class="text-xs text-brand-amber font-extrabold uppercase tracking-widest block mb-1">Especialidades Técnicas</span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">Servicios Generales J&D</h2>
+                </div>
+
+                <div id="services-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                    <!-- Dinámico vía JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- GALERIA -->
+        <section id="galeria" class="py-12 sm:py-20 bg-slate-950 border-t border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12">
+                    <div>
+                        <span class="text-xs text-brand-amber font-extrabold uppercase tracking-widest block mb-1">Trabajos Realizados</span>
+                        <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">Galería de Proyectos y Modelos</h2>
+                    </div>
+                    
+                    <!-- Filtros Móviles -->
+                    <div class="mt-4 md:mt-0 flex flex-wrap gap-1.5" id="gallery-filters">
+                        <button onclick="filterGallery('todos')" class="filter-btn active bg-brand-amber text-slate-950 text-xs px-3 py-1.5 rounded-lg font-bold">Todos</button>
+                        <button onclick="filterGallery('drywall')" class="filter-btn bg-slate-900 border border-slate-800 text-slate-300 text-xs px-3 py-1.5 rounded-lg font-semibold">Drywall</button>
+                        <button onclick="filterGallery('mayolica')" class="filter-btn bg-slate-900 border border-slate-800 text-slate-300 text-xs px-3 py-1.5 rounded-lg font-semibold">Mayólica</button>
+                        <button onclick="filterGallery('cocinas')" class="filter-btn bg-slate-900 border border-slate-800 text-slate-300 text-xs px-3 py-1.5 rounded-lg font-semibold">Cocinas</button>
+                        <button onclick="filterGallery('instalaciones')" class="filter-btn bg-slate-900 border border-slate-800 text-slate-300 text-xs px-3 py-1.5 rounded-lg font-semibold">Instalaciones</button>
+                    </div>
+                </div>
+
+                <!-- Grid Galería -->
+                <div id="gallery-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                    <!-- Dinámico vía JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- COTIZADOR EXPRESS -->
+        <section id="cotizador" class="py-12 sm:py-20 bg-slate-900 border-t border-slate-800">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-slate-950 rounded-2xl p-5 sm:p-8 border border-slate-800 shadow-2xl space-y-6">
+                    <div class="text-center space-y-2">
+                        <span class="bg-brand-amber/20 text-brand-amber text-xs font-bold px-3 py-1 rounded-full uppercase">Calculadora / Presupuesto</span>
+                        <h2 class="text-2xl font-extrabold text-white">Solicita tu Cotización al Instante</h2>
+                    </div>
+
+                    <form id="calculator-form" class="space-y-4 text-left">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 mb-1.5">Servicio Requerido</label>
+                            <select id="calc-service" class="w-full bg-slate-900 border border-slate-800 text-white rounded-xl p-3 text-sm focus:ring-2 focus:ring-brand-amber outline-none">
+                                <option value="Drywall (Tabiquería / Cielo Raso)">Instalación de Drywall / Cielo Raso</option>
+                                <option value="Enchapado de Mayólica / Porcelanato">Enchapado de Mayólica / Porcelanato</option>
+                                <option value="Construcción de Mesón / Cocina de Concreto">Mesón o Cocina de Concreto</option>
+                                <option value="Instalaciones Eléctricas / Bombas de Agua">Electricidad o Bombas de Agua</option>
+                                <option value="Gasfitería General">Gasfitería en General</option>
+                                <option value="Mantenimiento de Amoladoras / Taladros">Reparación de Herramientas (Moledora/Taladro)</option>
+                                <option value="Instalación de Cámaras de Seguridad">Cámaras de Seguridad</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 mb-1.5">Área Aproximada en m² (Opcional)</label>
+                            <input type="number" id="calc-area" placeholder="Ejemplo: 20" class="w-full bg-slate-900 border border-slate-800 text-white rounded-xl p-3 text-sm focus:ring-2 focus:ring-brand-amber outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 mb-1.5">Detalles del Proyecto</label>
+                            <textarea id="calc-details" rows="3" placeholder="Describe brevemente lo que necesitas realizar..." class="w-full bg-slate-900 border border-slate-800 text-white rounded-xl p-3 text-sm focus:ring-2 focus:ring-brand-amber outline-none"></textarea>
+                        </div>
+
+                        <button type="button" onclick="sendCalculatedQuote()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-base py-3.5 rounded-xl shadow-lg transition flex items-center justify-center space-x-2">
+                            <i class="fa-brands fa-whatsapp text-2xl"></i>
+                            <span>Enviar Proyecto a WhatsApp (+51 948706087)</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="contacto" class="bg-slate-950 text-white pt-10 pb-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+                <!-- Marca J&D -->
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-2.5">
+                        <div class="bg-brand-amber text-slate-950 px-2 py-1 rounded-lg font-black text-lg">
+                            J&D
+                        </div>
+                        <span class="text-base font-bold">SERVICIOS GENERALES</span>
+                    </div>
+                    <p class="text-slate-400 text-xs leading-relaxed">
+                        Maestro especialista en acabados de vivienda, drywall, electricidad, gasfitería, bombas de agua y mantenimiento de herramientas.
+                    </p>
+                </div>
+
+                <!-- Contacto -->
+                <div class="space-y-2">
+                    <h4 class="text-sm font-bold text-brand-amber uppercase tracking-wider">Contacto Directo</h4>
+                    <p class="text-xs text-slate-300 flex items-center"><i class="fa-solid fa-phone text-brand-amber mr-2 w-4"></i> <span id="footer-phone">+51 948 706 087</span></p>
+                    <p class="text-xs text-slate-300 flex items-center"><i class="fa-brands fa-whatsapp text-emerald-400 mr-2 w-4 text-sm"></i> <span id="footer-ws">+51 948 706 087</span></p>
+                    <p class="text-xs text-slate-300 flex items-center"><i class="fa-solid fa-location-dot text-brand-amber mr-2 w-4"></i> Atención a todo nivel local</p>
+                </div>
+
+                <!-- Admin Access -->
+                <div class="space-y-2">
+                    <h4 class="text-sm font-bold text-brand-amber uppercase tracking-wider">Acceso Administrador</h4>
+                    <button onclick="openAdminModal()" class="bg-slate-900 border border-slate-800 text-slate-300 hover:text-white px-3 py-2 rounded-lg text-xs font-bold flex items-center space-x-2">
+                        <i class="fa-solid fa-key text-brand-amber"></i>
+                        <span>Ingresar Panel Admin</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="pt-6 border-t border-slate-900 text-center text-[11px] text-slate-500">
+                <p>&copy; <span id="year"></span> J&D Servicios Generales y Acabados. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL: LOGIN ADMIN -->
+    <div id="modal-login" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-sm w-full p-6 shadow-2xl relative text-white">
+            <button onclick="closeAdminModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center mb-4">
+                <div class="bg-brand-amber/20 text-brand-amber w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-2 text-lg">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h3 class="text-lg font-bold">Panel Admin J&D</h3>
+                <p class="text-slate-400 text-xs">Ingresa la clave para administrar el sitio</p>
+            </div>
+            <form onsubmit="handleAdminLogin(event)" class="space-y-3">
+                <div>
+                    <input type="password" id="admin-pass-input" placeholder="Contraseña de Admin" required class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-3 text-xs outline-none focus:ring-2 focus:ring-brand-amber">
+                    <p class="text-[10px] text-slate-500 mt-1">Clave por defecto: <span class="text-brand-amber font-mono">admin123</span></p>
+                </div>
+                <div id="login-error" class="hidden text-xs text-red-400 bg-red-950/50 p-2 rounded border border-red-900">
+                    Contraseña incorrecta.
+                </div>
+                <button type="submit" class="w-full bg-brand-amber text-slate-950 font-bold py-2.5 rounded-xl text-xs">
+                    Entrar al Panel
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: PANEL ADMIN DE GESTIÓN -->
+    <div id="modal-admin-panel" class="fixed inset-0 bg-slate-950/95 backdrop-blur-md z-50 hidden overflow-y-auto p-4">
+        <div class="max-w-3xl mx-auto bg-slate-900 border border-slate-800 rounded-2xl p-5 text-white shadow-2xl my-6">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-3 mb-4">
+                <h3 class="text-base font-bold text-brand-amber flex items-center"><i class="fa-solid fa-sliders mr-2"></i> Panel Administrador J&D</h3>
+                <button onclick="closeAdminPanel()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+
+            <!-- TABS -->
+            <div class="flex border-b border-slate-800 space-x-2 mb-4">
+                <button onclick="switchAdminTab('gallery')" id="tab-btn-gallery" class="pb-2 text-xs font-bold border-b-2 border-brand-amber text-brand-amber">Galería</button>
+                <button onclick="switchAdminTab('services')" id="tab-btn-services" class="pb-2 text-xs font-bold text-slate-400 border-b-2 border-transparent">Servicios</button>
+                <button onclick="switchAdminTab('settings')" id="tab-btn-settings" class="pb-2 text-xs font-bold text-slate-400 border-b-2 border-transparent">Ajustes / Clave</button>
+            </div>
+
+            <!-- TAB GALERÍA -->
+            <div id="admin-tab-gallery" class="space-y-4">
+                <form onsubmit="handleAddGalleryItem(event)" class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
+                    <p class="text-xs font-bold text-brand-amber">Agregar Foto a la Galería</p>
+                    <input type="text" id="new-photo-title" placeholder="Título (Ej: Cielo Raso con LED)" required class="w-full bg-slate-900 border border-slate-800 p-2 rounded text-xs">
+                    <select id="new-photo-cat" class="w-full bg-slate-900 border border-slate-800 p-2 rounded text-xs">
+                        <option value="drywall">Drywall</option>
+                        <option value="mayolica">Mayólica / Enchapes</option>
+                        <option value="cocinas">Mesones / Cocinas</option>
+                        <option value="instalaciones">Electricidad / Instalaciones</option>
+                    </select>
+                    <input type="url" id="new-photo-url" placeholder="URL de la imagen (Link Web)" required class="w-full bg-slate-900 border border-slate-800 p-2 rounded text-xs">
+                    <button type="submit" class="bg-emerald-600 text-white font-bold px-3 py-1.5 rounded text-xs">Guardar Foto</button>
+                </form>
+
+                <div id="admin-gallery-list" class="space-y-2">
+                    <!-- Dinámico -->
+                </div>
+            </div>
+
+            <!-- TAB SERVICIOS -->
+            <div id="admin-tab-services" class="space-y-4 hidden">
+                <form onsubmit="handleAddServiceItem(event)" class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
+                    <p class="text-xs font-bold text-brand-amber">Agregar Nuevo Servicio</p>
+                    <input type="text" id="new-service-title" placeholder="Nombre del servicio" required class="w-full bg-slate-900 border border-slate-800 p-2 rounded text-xs">
+                    <input type="text" id="new-service-icon" placeholder="Icono FontAwesome (Ej: fa-solid fa-wrench)" required class="w-full bg-slate-900 border border-slate-800 p-2 rounded text-xs">
+                    <textarea id="new-service-desc" rows="2" placeholder="Descripción breve" required class="w-full bg-slate-900 border border-slate-800 p-2 rounded text-xs"></textarea>
+                    <button type="submit" class="bg-emerald-600 text-white font-bold px-3 py-1.5 rounded text-xs">Guardar Servicio</button>
+                </form>
+
+                <div id="admin-services-list" class="space-y-2">
+                    <!-- Dinámico -->
+                </div>
+            </div>
+
+            <!-- TAB CONFIGURACIÓN -->
+            <div id="admin-tab-settings" class="space-y-4 hidden">
+                <form onsubmit="handleSaveSettings(event)" class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-3">
+                    <div>
+                        <label class="block text-xs text-slate-300 mb-1">Número de WhatsApp (con código de país sin +)</label>
+                        <input type="text" id="setting-phone" required class="w-full bg-slate-900 border border-slate-800 p-2 rounded text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-300 mb-1">Cambiar Contraseña Admin</label>
+                        <input type="password" id="setting-pass" placeholder="Dejar en blanco para no modificar" class="w-full bg-slate-900 border border-slate-800 p-2 rounded text-xs">
+                    </div>
+                    <button type="submit" class="bg-brand-amber text-slate-950 font-bold px-4 py-2 rounded text-xs">Guardar Cambios</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        const DEFAULT_SERVICES = [
+            { id: 1, title: "Drywall & Cielo Raso", icon: "fa-solid fa-cubes", desc: "Divisiones de ambientes, cielo raso acústico y acabados en drywall." },
+            { id: 2, title: "Mayólica & Porcelanato", icon: "fa-solid fa-border-all", desc: "Enchapado de pisos, baños, cocinas y terrazas con acabados perfectos." },
+            { id: 3, title: "Cocinas de Concreto & Mesones", icon: "fa-solid fa-kitchen-set", desc: "Construcción de mesones fuertes de cemento empotrados." },
+            { id: 4, title: "Electricidad & Bombas de Agua", icon: "fa-solid fa-bolt", desc: "Cableado, tableros eléctricos, bombas de agua y sistemas de presión." },
+            { id: 5, title: "Gasfitería General", icon: "fa-solid fa-faucet-drip", desc: "Agua fría, caliente, tuberías de desagüe e instalación de sanitarios." },
+            { id: 6, title: "Reparación de Herramientas", icon: "fa-solid fa-screwdriver-wrench", desc: "Mantenimiento de amoladoras, taladros y moledoras de trabajo." },
+            { id: 7, title: "Cámaras de Seguridad", icon: "fa-solid fa-video", desc: "Instalación y configuración de cámaras de vigilancia para casas y negocios." }
+        ];
+
+        const DEFAULT_GALLERY = [
+            { id: 1, title: "Cielo Raso Decorativo en Drywall", category: "drywall", url: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80" },
+            { id: 2, title: "Enchapado de Porcelanato en Baño", category: "mayolica", url: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80" },
+            { id: 3, title: "Mesón de Cocina de Cemento", category: "cocinas", url: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80" },
+            { id: 4, title: "Tablero Eléctrico Residencial", category: "instalaciones", url: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80" }
+        ];
+
+        let appConfig = { phone: '51948706087', adminPass: 'admin123', isLoggedIn: false };
+        let servicesData = [];
+        let galleryData = [];
+
+        window.onload = function() {
+            document.getElementById('year').innerText = new Date().getFullYear();
+            loadState();
+            renderAll();
+
+            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.toggle('hidden');
+            });
+        };
+
+        function closeMobileMenu() {
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        function loadState() {
+            const savedConfig = localStorage.getItem('jd_config');
+            if (savedConfig) appConfig = JSON.parse(savedConfig);
+
+            const savedServices = localStorage.getItem('jd_services');
+            servicesData = savedServices ? JSON.parse(savedServices) : DEFAULT_SERVICES;
+
+            const savedGallery = localStorage.getItem('jd_gallery');
+            galleryData = savedGallery ? JSON.parse(savedGallery) : DEFAULT_GALLERY;
+        }
+
+        function saveState() {
+            localStorage.setItem('jd_config', JSON.stringify(appConfig));
+            localStorage.setItem('jd_services', JSON.stringify(servicesData));
+            localStorage.setItem('jd_gallery', JSON.stringify(galleryData));
+        }
+
+        function renderAll() {
+            renderContactLinks();
+            renderServices();
+            renderGallery('todos');
+            updateAdminUI();
+        }
+
+        function renderContactLinks() {
+            const cleanPhone = appConfig.phone.replace(/[^0-9]/g, '');
+            const wsLink = `https://wa.me/${cleanPhone}?text=${encodeURIComponent('Hola Maestro de J&D Servicios Generales, me gustaría solicitar una cotización.')}`;
+            
+            document.getElementById('nav-ws-btn').href = wsLink;
+            document.getElementById('mobile-ws-btn').href = wsLink;
+            document.getElementById('hero-ws-btn').href = wsLink;
+            document.getElementById('floating-ws-btn').href = wsLink;
+            
+            document.getElementById('footer-phone').innerText = `+${cleanPhone}`;
+            document.getElementById('footer-ws').innerText = `+${cleanPhone}`;
+        }
+
+        function renderServices() {
+            const container = document.getElementById('services-container');
+            container.innerHTML = servicesData.map(item => `
+                <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl space-y-2">
+                    <div class="w-10 h-10 bg-brand-amber/10 text-brand-amber rounded-lg flex items-center justify-center text-lg">
+                        <i class="${item.icon}"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-white leading-tight">${item.title}</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed">${item.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderGallery(filter = 'todos') {
+            const container = document.getElementById('gallery-container');
+            const items = filter === 'todos' ? galleryData : galleryData.filter(i => i.category === filter);
+
+            if (items.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-8 text-slate-500 text-xs">No hay fotos en esta categoría aún.</div>`;
+                return;
+            }
+
+            container.innerHTML = items.map(item => `
+                <div class="bg-slate-900 rounded-xl overflow-hidden border border-slate-800">
+                    <div class="relative h-48">
+                        <img src="${item.url}" alt="${item.title}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/1e293b/f59e0b?text=Trabajo+J%26D'">
+                        <span class="absolute top-2 left-2 bg-slate-950/80 text-brand-amber text-[10px] font-extrabold uppercase px-2 py-0.5 rounded">
+                            ${item.category}
+                        </span>
+                    </div>
+                    <div class="p-3">
+                        <h4 class="font-bold text-white text-xs">${item.title}</h4>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterGallery(category) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-amber', 'text-slate-950');
+                btn.classList.add('bg-slate-900', 'text-slate-300');
+            });
+            event.target.classList.remove('bg-slate-900', 'text-slate-300');
+            event.target.classList.add('bg-brand-amber', 'text-slate-950');
+            renderGallery(category);
+        }
+
+        function sendCalculatedQuote() {
+            const service = document.getElementById('calc-service').value;
+            const area = document.getElementById('calc-area').value;
+            const details = document.getElementById('calc-details').value;
+
+            let msg = `*COTIZACIÓN WEB J&D SERVICIOS GENERALES*\n\n`;
+            msg += `📌 *Servicio:* ${service}\n`;
+            if (area) msg += `📐 *Área aprox:* ${area} m²\n`;
+            if (details) msg += `💬 *Detalles:* ${details}\n`;
+
+            const cleanPhone = appConfig.phone.replace(/[^0-9]/g, '');
+            window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        function openAdminModal() { document.getElementById('modal-login').classList.remove('hidden'); }
+        function closeAdminModal() { document.getElementById('modal-login').classList.add('hidden'); }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            if (document.getElementById('admin-pass-input').value === appConfig.adminPass) {
+                appConfig.isLoggedIn = true;
+                closeAdminModal();
+                updateAdminUI();
+                openAdminPanel();
+            } else {
+                document.getElementById('login-error').classList.remove('hidden');
+            }
+        }
+
+        function logoutAdmin() {
+            appConfig.isLoggedIn = false;
+            updateAdminUI();
+            closeAdminPanel();
+        }
+
+        function updateAdminUI() {
+            const adminBar = document.getElementById('admin-bar');
+            if (appConfig.isLoggedIn) adminBar.classList.remove('hidden');
+            else adminBar.classList.add('hidden');
+        }
+
+        function openAdminPanel() {
+            if (!appConfig.isLoggedIn) return;
+            document.getElementById('modal-admin-panel').classList.remove('hidden');
+            document.getElementById('setting-phone').value = appConfig.phone;
+            renderAdminLists();
+        }
+
+        function closeAdminPanel() { document.getElementById('modal-admin-panel').classList.add('hidden'); }
+
+        function switchAdminTab(tab) {
+            ['gallery', 'services', 'settings'].forEach(t => {
+                document.getElementById(`admin-tab-${t}`).classList.add('hidden');
+                document.getElementById(`tab-btn-${t}`).classList.remove('border-brand-amber', 'text-brand-amber');
+            });
+            document.getElementById(`admin-tab-${tab}`).classList.remove('hidden');
+            document.getElementById(`tab-btn-${tab}`).classList.add('border-brand-amber', 'text-brand-amber');
+        }
+
+        function renderAdminLists() {
+            document.getElementById('admin-gallery-list').innerHTML = galleryData.map(item => `
+                <div class="bg-slate-950 p-2 rounded flex items-center justify-between border border-slate-800 text-xs">
+                    <span class="truncate max-w-[200px]">${item.title}</span>
+                    <button onclick="deleteGalleryItem(${item.id})" class="text-red-400 p-1"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `).join('');
+
+            document.getElementById('admin-services-list').innerHTML = servicesData.map(item => `
+                <div class="bg-slate-950 p-2 rounded flex items-center justify-between border border-slate-800 text-xs">
+                    <span class="truncate max-w-[200px]">${item.title}</span>
+                    <button onclick="deleteServiceItem(${item.id})" class="text-red-400 p-1"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `).join('');
+        }
+
+        function handleAddGalleryItem(e) {
+            e.preventDefault();
+            galleryData.unshift({
+                id: Date.now(),
+                title: document.getElementById('new-photo-title').value,
+                category: document.getElementById('new-photo-cat').value,
+                url: document.getElementById('new-photo-url').value
+            });
+            saveState(); renderAll(); renderAdminLists(); e.target.reset();
+        }
+
+        function deleteGalleryItem(id) {
+            galleryData = galleryData.filter(i => i.id !== id);
+            saveState(); renderAll(); renderAdminLists();
+        }
+
+        function handleAddServiceItem(e) {
+            e.preventDefault();
+            servicesData.push({
+                id: Date.now(),
+                title: document.getElementById('new-service-title').value,
+                icon: document.getElementById('new-service-icon').value,
+                desc: document.getElementById('new-service-desc').value
+            });
+            saveState(); renderAll(); renderAdminLists(); e.target.reset();
+        }
+
+        function deleteServiceItem(id) {
+            servicesData = servicesData.filter(i => i.id !== id);
+            saveState(); renderAll(); renderAdminLists();
+        }
+
+        function handleSaveSettings(e) {
+            e.preventDefault();
+            const newPhone = document.getElementById('setting-phone').value;
+            const newPass = document.getElementById('setting-pass').value;
+            if (newPhone) appConfig.phone = newPhone;
+            if (newPass) appConfig.adminPass = newPass;
+            saveState(); renderAll(); alert('Configuración guardada correctamente');
+        }
+    </script>
+</body>
+</html>
